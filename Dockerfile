@@ -32,13 +32,17 @@ RUN docker-php-ext-install \
     calendar \
     pdo_mysql
 
+VOLUME /var/www/html
+
 # Copy code and run composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-COPY . /var/www/html
-RUN cd /var/www/html && \
+COPY . /var/www/tmp
+RUN cd /var/www/tmp && \
     cp .env.example .env && \
     composer install --no-dev && \
     php artisan key:generate
 
-# Make sure Apache can access PHP files
-RUN chown -R www-data:www-data /var/www/html
+RUN ["chmod", "+x", "/var/www/tmp/docker-entrypoint.sh"]
+
+ENTRYPOINT ["/var/www/tmp/docker-entrypoint.sh"]
+CMD ["apache2-foreground"]

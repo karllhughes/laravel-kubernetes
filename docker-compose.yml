@@ -2,15 +2,15 @@ version: '3.5'
 
 services:
   app:
-    build:
-      context: '.'
+    image: karllhughes/laravel-kubernetes:0.3.0
+    restart: always
     ports:
       - 8000:80
-
   db:
     image: mysql:5.7
+    restart: always
     environment:
       - MYSQL_ROOT_PASSWORD=rootpassword
-      - MYSQL_DATABASE=${DB_DATABASE}
-      - MYSQL_USER=${DB_USERNAME}
-      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_DATABASE=travellist
+      - MYSQL_USER=travellist_user
+      - MYSQL_PASSWORD=password
