@@ -86,7 +86,14 @@
 
                 <div class="links">
                     <strong>Database Connected: </strong>
-                    {{ DB::connection()->getDatabaseName() }}
+                    @php
+                        try {
+                            DB::connection()->getPDO();
+                            echo DB::connection()->getDatabaseName();
+                        } catch (\Exception $e) {
+                            echo 'None';
+                        }
+                    @endphp
                 </div>
             </div>
         </div>

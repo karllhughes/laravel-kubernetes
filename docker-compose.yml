@@ -1,12 +1,12 @@
 version: '3.5'
 
 services:
-  app:
-    image: karllhughes/laravel-kubernetes:0.3.0
+  php:
+    image: karllhughes/laravel-kubernetes:latest
     restart: always
     ports:
       - 8000:80
-  db:
+  mysql:
     image: mysql:5.7
     restart: always
     environment:

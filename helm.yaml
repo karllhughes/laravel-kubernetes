@@ -1,4 +1,5 @@
 mysql:
+  rootPassword: "rootpwd"
   user: travellist_user
   password: "password"
   database: travellist
@@ -7,3 +8,12 @@ php:
   repository: "karllhughes/laravel-kubernetes"
   tag: "0.3.0"
   fpmEnabled: false
+
+# Add to use Ingress/SSL
+service:
+  type: ClusterIP
+  HTTPPort: 80
+
+ingress:
+  enabled: true
+  domain: laravel-kubernetes.karllhughes.com
