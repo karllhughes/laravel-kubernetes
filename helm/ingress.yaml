@@ -15,5 +15,5 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: laravel-helm-lamp
+              serviceName: laravel-kubernetes-lamp
               servicePort: 80
