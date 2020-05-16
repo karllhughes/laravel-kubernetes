@@ -32,17 +32,15 @@ RUN docker-php-ext-install \
     calendar \
     pdo_mysql
 
+ENV LOG_CHANNEL=stderr
 VOLUME /var/www/html
 
 # Copy code and run composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY . /var/www/tmp
-RUN cd /var/www/tmp && \
-    cp .env.example .env && \
-    composer install --no-dev && \
-    php artisan key:generate
+RUN cd /var/www/tmp && composer install --no-dev
 
-RUN ["chmod", "+x", "/var/www/tmp/docker-entrypoint.sh"]
+RUN chmod +x /var/www/tmp/docker-entrypoint.sh
 
 ENTRYPOINT ["/var/www/tmp/docker-entrypoint.sh"]
 CMD ["apache2-foreground"]
