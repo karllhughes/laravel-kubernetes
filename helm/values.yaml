@@ -12,11 +12,10 @@ php:
     - name: DB_HOST
       value: localhost
 
-# Add to use Ingress/SSL
-#service:
-#  type: ClusterIP
-#  HTTPPort: 80
-#
-#ingress:
-#  enabled: true
-#  domain: laravel-kubernetes.karllhughes.com
+# Use Ingress Controller
+service:
+  type: ClusterIP
+  HTTPPort: 80
+ingress:
+  enabled: true
+  domain: laravel-kubernetes.karllhughes.com
